@@ -1,10 +1,14 @@
+#! /bin/env python
+import sys
+
 # Open the file to write the output
-cnf_file = open("sudoku.cnf", 'w')
+cnf_file = sys.stdout
 
 clauses = 8829
 
 #Test input
-input = "163805070008040065005007008450082039301000040700000000839050000604200590000093081"
+
+input = input()
 
 #Find the no. of filled in cells
 for char in input:
@@ -34,7 +38,7 @@ for i in range(0, 9):
 for i in range(0, 9):
     for k in range(1, 10):
         for j in range(0, 8):
-            for l in range(j + 1, 9):  
+            for l in range(j + 1, 9):
                 cnf_file.write(str(-(81*i + 9*j + k)) + " " + str(-(81*i + 9*l + k)) + " 0\n")
 
 # Write clauses for "Each number appears at most once in every column"
@@ -75,9 +79,9 @@ for char in input:
     if char != "0":
         value = 81 * (int(row) - 1) + 9 * (int(column) - 1) + int(char) - 1 + 1
         cnf_file.write(str(value) + " 0\n")
-    
+
     column += 1
- 
+
     if column == 10:
         column = 1
         row += 1
