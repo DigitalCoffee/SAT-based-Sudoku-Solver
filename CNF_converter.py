@@ -48,6 +48,13 @@ for j in range(0, 9):
 
 # Write clauses for "Each number appears at most one in every 3x3 sub-grid"
 
+for k in range(1, 10):
+    for a in range(0, 3):
+        for b in range(0, 3):
+            for u in range(0, 3):
+                for v in range(0, 2):
+                    for w in range(v + 1, 3):
+                        cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + u) + 9*(3*b + w) + k)) + " 0\n")
 
 
 #Add the clauses for the values that are in the sudoku puzzle
@@ -57,7 +64,6 @@ column = 1
 for char in input:
 
     if char != "0":
-        cnf_file.write("c entry (" + str(row) + "," + str(column) + ") contains a " + str(char) + '\n') #Remove this line later?
         value = 81 * (int(row) - 1) + 9 * (int(column) - 1) + int(char) - 1 + 1
         cnf_file.write(str(value) + " 0\n")
     
