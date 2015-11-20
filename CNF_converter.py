@@ -21,7 +21,7 @@ for char in input:
 
 # Let N be the no. of distinct symbols
 # No. of variables = N^3. In normal cases, we have 9 distinct symbols. 9^3 = 729
-# No. of clauses = N^2 + l3Y58T7GFT
+# No. of clauses = 8829 (for 9x9 sudoku) + clauses for filled in cells
 cnf_file.write("p cnf 729 " + str(clauses) + "\n")
 
 # Write clauses for "Every cell contains at least one number"
@@ -36,8 +36,15 @@ for h in range(0, 9):
 
 # Write clauses for "Each number appears at most once in every column"
 
+for j in range(0, 9):
+    for k in range(1, 10):
+        for i in range(0, 9):
+            for l in range(i+1, 9):
+                cnf_file.write("-" + str(81*i + 9*j + k) + " -" + str(81*l + 9*j + k) + " 0\n")
+
 
 # Write clauses for "Each number appears at most one in every 3x3 sub-grid"
+
 
 
 #Add the clauses for the values that are in the sudoku puzzle
