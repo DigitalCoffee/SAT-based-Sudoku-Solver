@@ -24,24 +24,24 @@ for char in input:
 cnf_file.write("p cnf 729 " + str(clauses) + "\n")
 
 # Write clauses for "Every cell contains at least one number"
-for h in range(0, 9):
-    for i in range(0, 9):
-        for j in range(1, 10):
-            cnf_file.write(str(81*h + 9*i + j) + " ")
+for i in range(0, 9):
+    for j in range(0, 9):
+        for k in range(1, 10):
+            cnf_file.write(str(81*i + 9*j + k) + " ")
         cnf_file.write("0\n")
 
 # Write clauses for "Each number appears at most once in every row"
-for j in range(1, 10):
-    for i in range(1, 10):
-        for h in range(1, 9):
-            for k in range(1, 10):  
-                cnf_file.write(str(-(81*h + 9*i + j)) + " " + str(-(81*k + 9*i + j)) + " 0\n")
+for i in range(0, 9):
+    for k in range(1, 10):
+        for j in range(0, 8):
+            for l in range(j + 1, 9):  
+                cnf_file.write(str(-(81*i + 9*j + k)) + " " + str(-(81*i + 9*l + k)) + " 0\n")
 
 # Write clauses for "Each number appears at most once in every column"
 
 for j in range(0, 9):
     for k in range(1, 10):
-        for i in range(0, 9):
+        for i in range(0, 8):
             for l in range(i+1, 9):
                 cnf_file.write(str(-(81*i + 9*j + k)) + " " + str(-(81*l + 9*j + k)) + " 0\n")
 
