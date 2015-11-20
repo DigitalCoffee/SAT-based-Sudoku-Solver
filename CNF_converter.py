@@ -47,8 +47,14 @@ for j in range(0, 9):
 
 
 # Write clauses for "Each number appears at most one in every 3x3 sub-grid"
-
-
+for k in range(1, 10):
+    for a in range(0, 3):
+        for b in range(0, 3):
+            for u in range(0, 2):
+                for v in range(0, 3):
+                    for w in range(u+1, 3):
+                        for t in range(0, 3):
+                            cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + w) + 9*(3*b + t) + k)) + " 0\n")
 
 #Add the clauses for the values that are in the sudoku puzzle
 row = 1
