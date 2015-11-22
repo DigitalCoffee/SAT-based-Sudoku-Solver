@@ -1,5 +1,13 @@
 # SAT-based-Sudoku-Solver
+
 Converts an input string to DIMACS format to be run through miniSAT. The output of miniSAT is parsed an a solution is prettyprinted.
+
+## Group
+
+* Devin Corrigall (v00779143)
+* Andrew Hansen (v00768769)
+* Andrew Hobden (v00788452)
+* Jorin Weatherston (v00711046)
 
 ## Requirements
 
