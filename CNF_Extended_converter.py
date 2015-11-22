@@ -20,7 +20,7 @@ clauses = 11988
 
 #Find the no. of filled in cells
 for char in input:
-    if char != "0":
+    if char != "0" or char != ".":
         clauses += 1
 
 cnf_file.write("p cnf " + str(variables) + " " + str(clauses) + "\n")
