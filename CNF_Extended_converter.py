@@ -4,28 +4,26 @@ import sys
 # Open the file to write the output
 cnf_file = sys.stdout
 
-clauses = 8829
-
-#Test input
-
 input = input()
 
-#Find the no. of filled in cells
-for char in input:
-    if char != "0":
-        clauses += 1
 
 # DIMACS Structure:
 # Every commented line begins with a lowercase c
 # The first line of the problem starts with a lowercase p, problem type (cnf), # of variables, and # of clauses
 # The following lines define each clause, and must end with a 0
 
-
-
 # Let N be the no. of distinct symbols
 # No. of variables = N^3. In normal cases, we have 9 distinct symbols. 9^3 = 729
-# No. of clauses = 8829 (for 9x9 sudoku) + clauses for filled in cells
-cnf_file.write("p cnf 729 " + str(clauses) + "\n")
+# No. of clauses = 11,988 (for 9x9 sudoku) + clauses for filled in cells
+variables = 729
+clauses = 11,988
+
+#Find the no. of filled in cells
+for char in input:
+    if char != "0":
+        clauses += 1
+
+cnf_file.write("p cnf str(variables) " + str(clauses) + "\n")
 
 # Write clauses for "Every cell contains at least one number"
 cnf_file.write("c # Rules: \"Every cell contains at least one number\"\n")
@@ -66,7 +64,7 @@ for k in range(1, 10):
                         cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+"\n")
                         cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + u) + 9*(3*b + w) + k)) + " 0\n")
 
-cnf_file.write("c <New set>\n")
+#cnf_file.write("c <New set>\n")
 for k in range(1, 10):
     for a in range(0, 3):
         for b in range(0, 3):
@@ -76,6 +74,26 @@ for k in range(1, 10):
                         for t in range(0, 3):
                             cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+" t:"+str(t)+"\n")
                             cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + w) + 9*(3*b + t) + k)) + " 0\n")
+
+
+# Write clauses for "Each number appears at least once in every row"
+cnf_file.write("c # Rules: \"Each number appears at least once in every row\"\n")
+for j in range(0, 9):
+    for k in range(1, 10):
+        cnf_file.write("c j:"+str(j)+" k:"+str(k)+"\n")
+        for i in range(0, 9):
+            cnf_file.write(str(81*i + 9*j + k) + " ")
+        cnf_file.write("0\n")
+
+# Write clauses for "Each number appears at least once in every column"
+cnf_file.write("c # Rules: \"Each number appears at least once in every column\"\n")
+for i in range(0, 9):
+    for k in range(1, 10):
+        cnf_file.write("c i:"+str(i)+" k:"+str(k)+"\n")
+        for j in range(0, 9):
+            cnf_file.write(str(81*i + 9*j + k) + " ")
+        cnf_file.write("0\n")
+
 
 cnf_file.write("c # Start of Puzzle\n")
 #Add the clauses for the values that are in the sudoku puzzle
