@@ -18,50 +18,50 @@ input = input()
 variables = 729
 clauses = 11988
 
-#Find the no. of filled in cells
+# Find the no. of filled in cells
 for char in input:
-    if char != "0" or char != ".":
+    if char != "0" and char != ".":
         clauses += 1
 
 cnf_file.write("p cnf " + str(variables) + " " + str(clauses) + "\n")
 
 # Write clauses for "Every cell contains at least one number"
-#cnf_file.write("c # Rules: \"Every cell contains at least one number\"\n")
+cnf_file.write("c # Rules: \"Every cell contains at least one number\"\n")
 for i in range(0, 9):
     for j in range(0, 9):
-        #cnf_file.write("c i:"+str(i)+" j:"+str(j)+"\n")
+        cnf_file.write("c i:"+str(i)+" j:"+str(j)+"\n")
         for k in range(1, 10):
             cnf_file.write(str(81*i + 9*j + k) + " ")
         cnf_file.write("0\n")
 
 # Write clauses for "Each number appears at most once in every row"
-#cnf_file.write("c # Rules: \"Each number appears at most once in every row\"\n")
+cnf_file.write("c # Rules: \"Each number appears at most once in every row\"\n")
 for i in range(0, 9):
     for k in range(1, 10):
         for j in range(0, 8):
             for l in range(j + 1, 9):
-    #            cnf_file.write("c i:"+str(i)+" k:"+str(k)+" j:"+str(j)+" l:"+str(l)+"\n")
+                cnf_file.write("c i:"+str(i)+" k:"+str(k)+" j:"+str(j)+" l:"+str(l)+"\n")
                 cnf_file.write(str(-(81*i + 9*j + k)) + " " + str(-(81*i + 9*l + k)) + " 0\n")
 
 # Write clauses for "Each number appears at most once in every column"
-#cnf_file.write("c # Rules: \"Each number appears at most once in every column\"\n")
+cnf_file.write("c # Rules: \"Each number appears at most once in every column\"\n")
 for j in range(0, 9):
     for k in range(1, 10):
         for i in range(0, 8):
             for l in range(i+1, 9):
- #               cnf_file.write("c j:"+str(j)+" k:"+str(k)+" i:"+str(i)+" l:"+str(l)+"\n")
+                cnf_file.write("c j:"+str(j)+" k:"+str(k)+" i:"+str(i)+" l:"+str(l)+"\n")
                 cnf_file.write(str(-(81*i + 9*j + k)) + " " + str(-(81*l + 9*j + k)) + " 0\n")
 
 
 # Write clauses for "Each number appears at most one in every 3x3 sub-grid"
-#cnf_file.write("c # Rules: \"Each number appears at most one in every 3x3 sub-grid\"\n")
+cnf_file.write("c # Rules: \"Each number appears at most one in every 3x3 sub-grid\"\n")
 for k in range(1, 10):
     for a in range(0, 3):
         for b in range(0, 3):
             for u in range(0, 3):
                 for v in range(0, 2):
                     for w in range(v + 1, 3):
- #                       cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+"\n")
+                        cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+"\n")
                         cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + u) + 9*(3*b + w) + k)) + " 0\n")
 
 cnf_file.write("c <New set>\n")
@@ -73,7 +73,7 @@ for k in range(1, 10):
                 for v in range(0, 3):
                     for w in range(u+1, 3):
                         for t in range(0, 3):
- #                           cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+" t:"+str(t)+"\n")
+                            cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+" t:"+str(t)+"\n")
                             cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + w) + 9*(3*b + t) + k)) + " 0\n")
 
 # Write clauses for "There is at most one number in each entry:"
@@ -84,19 +84,19 @@ for x in range(0, 9):
                 cnf_file.write(str(-(81*x + 9*y + z)) + " " + str(-(81*x + 9*y + i)) + " 0\n")
                 
 # Write clauses for "Each number appears at least once in every row"
-#cnf_file.write("c # Rules: \"Each number appears at least once in every row\"\n")
+cnf_file.write("c # Rules: \"Each number appears at least once in every row\"\n")
 for j in range(0, 9):
     for k in range(1, 10):
-#        cnf_file.write("c j:"+str(j)+" k:"+str(k)+"\n")
+        cnf_file.write("c j:"+str(j)+" k:"+str(k)+"\n")
         for i in range(0, 9):
             cnf_file.write(str(81*i + 9*j + k) + " ")
         cnf_file.write("0\n")
 
 # Write clauses for "Each number appears at least once in every column"
-#cnf_file.write("c # Rules: \"Each number appears at least once in every column\"\n")
+cnf_file.write("c # Rules: \"Each number appears at least once in every column\"\n")
 for i in range(0, 9):
     for k in range(1, 10):
-#        cnf_file.write("c i:"+str(i)+" k:"+str(k)+"\n")
+        cnf_file.write("c i:"+str(i)+" k:"+str(k)+"\n")
         for j in range(0, 9):
             cnf_file.write(str(81*i + 9*j + k) + " ")
         cnf_file.write("0\n")
@@ -110,7 +110,7 @@ for z in range(1, 10):
                     cnf_file.write(str(81*(3*i + x) + 9*(3*j + y) + z) + " ")   
             cnf_file.write("0\n")
 
-#cnf_file.write("c # Start of Puzzle\n")
+cnf_file.write("c # Start of Puzzle\n")
 #Add the clauses for the values that are in the sudoku puzzle
 row = 1
 column = 1
