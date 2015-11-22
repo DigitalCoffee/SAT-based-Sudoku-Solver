@@ -4,28 +4,26 @@ import sys
 # Open the file to write the output
 cnf_file = sys.stdout
 
-clauses = 8829
-
-#Test input
-
 input = input()
 
-#Find the no. of filled in cells
-for char in input:
-    if char != "0":
-        clauses += 1
 
 # DIMACS Structure:
 # Every commented line begins with a lowercase c
 # The first line of the problem starts with a lowercase p, problem type (cnf), # of variables, and # of clauses
 # The following lines define each clause, and must end with a 0
 
-
-
 # Let N be the no. of distinct symbols
 # No. of variables = N^3. In normal cases, we have 9 distinct symbols. 9^3 = 729
 # No. of clauses = 8829 (for 9x9 sudoku) + clauses for filled in cells
-cnf_file.write("p cnf 729 " + str(clauses) + "\n")
+variables = 729
+clauses = 8829
+
+#Find the no. of filled in cells
+for char in input:
+    if char != "0":
+        clauses += 1
+
+cnf_file.write("p cnf " + str(variables) + " " + str(clauses) + "\n")
 
 # Write clauses for "Every cell contains at least one number"
 cnf_file.write("c # Rules: \"Every cell contains at least one number\"\n")
