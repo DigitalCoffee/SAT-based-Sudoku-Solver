@@ -10,3 +10,4 @@ all:
 	echo "${TEST}" | ${PYTHON3} CNF_converter.py > ${CNF}
 	${MINISAT} ${CNF} ${MINISAT_OUT} || true
 	cat ${MINISAT_OUT} | ${PYTHON3} prettyprint.py > ${OUTPUT}
+	cat ${OUTPUT}
