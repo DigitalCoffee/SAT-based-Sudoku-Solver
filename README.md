@@ -8,4 +8,4 @@ Converts an input string to DIMACS format to be run through miniSAT. The output 
 
 ## Using
 
-Simply run `make`!
+Simply run `make` for normal, or `make extended` for extended!

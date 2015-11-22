@@ -6,8 +6,16 @@ OUTPUT="_result"
 MINISAT="minisat" # Location of the binary. If it's on path this should work.
 
 
-all:
+all: default
+
+default:
 	echo "${TEST}" | ${PYTHON3} CNF_converter.py > ${CNF}
+	${MINISAT} ${CNF} ${MINISAT_OUT} || true
+	cat ${MINISAT_OUT} | ${PYTHON3} prettyprint.py > ${OUTPUT}
+	cat ${OUTPUT}
+
+extended:
+	echo "${TEST}" | ${PYTHON3} CNF_Extended_converter.py > ${CNF}
 	${MINISAT} ${CNF} ${MINISAT_OUT} || true
 	cat ${MINISAT_OUT} | ${PYTHON3} prettyprint.py > ${OUTPUT}
 	cat ${OUTPUT}
