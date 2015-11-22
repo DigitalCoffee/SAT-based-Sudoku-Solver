@@ -8,4 +8,7 @@ Converts an input string to DIMACS format to be run through miniSAT. The output 
 
 ## Using
 
-Simply run `make` for normal, or `make extended` for extended!
+* `make` for a normal run on a default puzzle.
+* `make extended` to use the extended rule set.
+* `make hard` to run on a "hard" problem.
+* `make unsolvable` to run on an unsolvable problem.
