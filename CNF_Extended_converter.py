@@ -77,6 +77,14 @@ for k in range(1, 10):
                             cnf_file.write("c k:"+str(k)+" a:"+str(a)+" b:"+str(b)+" u:"+str(u)+" v:"+str(v)+" w:"+str(w)+" t:"+str(t)+"\n")
                             cnf_file.write(str(-(81*(3*a + u) + 9*(3*b + v) + k)) + " " + str(-(81*(3*a + w) + 9*(3*b + t) + k)) + " 0\n")
 
+# Write clauses for "There is at most one number in each entry:"
+for x in range(0, 9):
+    for y in range(0, 9):
+        for z in range(1, 9):
+            for i in range(z + 1, 10):
+                cnf_file.write(str(-(81*x + 9*y + z)) + " " + str(-(81*x + 9*y + i)) + " 0\n")
+                
+
 cnf_file.write("c # Start of Puzzle\n")
 #Add the clauses for the values that are in the sudoku puzzle
 row = 1
